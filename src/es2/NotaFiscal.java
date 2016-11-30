@@ -1,5 +1,10 @@
 package es2;
 
+/**
+ * Classe responsavel por manipular as notas fiscais
+ * @author Bruna Barbosa
+ *
+ */
 public class NotaFiscal {
 
 	private String mNomeCliente;

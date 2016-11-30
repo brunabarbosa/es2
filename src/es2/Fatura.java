@@ -1,5 +1,10 @@
 package es2;
 
+/**
+ * Classe responsavel por manipular as faturas
+ * @author Bruna Barbosa
+ *
+ */
 public class Fatura {
 
 	private String mNomeCliente;
@@ -59,6 +64,11 @@ public class Fatura {
 		mSalorFatura = valorFatura;
 	}
 
+	/**
+	 * Metodo que retorna o valor do imposto. Cada tipo
+	 * de servico tem uma porcentagem de imposto especifico.
+	 * @return totalImposto
+	 */
 	public double calculaImposto() {
 		return (getValorFatura() * getServico().valorImposto)/100;
 	}
