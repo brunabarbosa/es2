@@ -2,69 +2,65 @@ package es2;
 
 public class Fatura {
 
-	private String nomeCliente;
-	private String enderecoCliente;
-	private ServicoEnum servico;
-	private double valorFatura;
+	private String mNomeCliente;
+	private String mEnderecoCliente;
+	private ServicoEnum mServico;
+	private double mSalorFatura;
 	
 	public Fatura(String nomeCliente, String enderecoCliente, double valorFatura) throws Exception {
-		if(nomeCliente == null ||
-				nomeCliente.isEmpty()){
-			throw new Exception("Nome do cliente nao pode ser vazio ou nulo");
-		}
-		if(valorFatura < 0){
-			throw new Exception("Valor da fatura nao pode ser negativo");
-		}
 		
-		this.nomeCliente = nomeCliente;
-		this.enderecoCliente = enderecoCliente;
-		this.servico = ServicoEnum.IMPOSTO_DEFAULT;
-		this.valorFatura = valorFatura;
+		setNomeCliente(nomeCliente);
+		setValorFatura(valorFatura);
+		setEnderecoCliente(enderecoCliente);
+		this.mServico = ServicoEnum.IMPOSTO_DEFAULT;
 	}
 	
 	public Fatura(String nomeCliente, String enderecoCliente, ServicoEnum servico, double valorFatura) throws Exception {
 		this(nomeCliente, enderecoCliente, valorFatura);
-		
-		this.nomeCliente = nomeCliente;
-		this.enderecoCliente = enderecoCliente;
-		this.servico = servico;
-		this.valorFatura = valorFatura;
+		this.mServico = servico;
 	}
 	
 	public String getNomeCliente() {
-		return nomeCliente;
+		return mNomeCliente;
 	}
 
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
+	public void setNomeCliente(String nomeCliente) throws Exception {
+		if(nomeCliente == null ||
+				nomeCliente.isEmpty()){
+			throw new Exception("Nome do cliente nao pode ser vazio ou nulo");
+		}
+		mNomeCliente = nomeCliente;
 	}
 
 	public String getEnderecoCliente() {
-		return enderecoCliente;
+		return mEnderecoCliente;
 	}
 
 	public void setEnderecoCliente(String enderecoCliente) {
-		this.enderecoCliente = enderecoCliente;
+		this.mEnderecoCliente = enderecoCliente;
 	}
 
 	public ServicoEnum getServico() {
-		return servico;
+		return mServico;
 	}
 
 	public void setServico(ServicoEnum servico) {
-		this.servico = servico;
+		this.mServico = servico;
 	}
 
 	public double getValorFatura() {
-		return valorFatura;
+		return mSalorFatura;
 	}
 
-	public void setValorFatura(double valorFatura) {
-		this.valorFatura = valorFatura;
+	public void setValorFatura(double valorFatura) throws Exception {
+		if(valorFatura < 0){
+			throw new Exception("Valor da fatura nao pode ser negativo");
+		}
+		mSalorFatura = valorFatura;
 	}
 
 	public double calculaImposto() {
-		return (valorFatura * servico.valorImposto)/100;
+		return (getValorFatura() * getServico().valorImposto)/100;
 	}
 
 

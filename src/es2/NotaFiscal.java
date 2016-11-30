@@ -2,51 +2,48 @@ package es2;
 
 public class NotaFiscal {
 
-	private String nomeCliente;
-	private double valor;
-	private double imposto;
+	private String mNomeCliente;
+	private double mValor;
+	private double mImposto;
 	public NotaFiscal(String nomeCliente, double valorNotaFiscal, double imposto) throws Exception {
 		
+		setNomeCliente(nomeCliente);
+		setValor(valorNotaFiscal);
+		setImpostoServico(imposto);
+	}
+	
+	public String getNomeCliente(){
+		return mNomeCliente;
+	}
+	
+	public void setNomeCliente(String nomeCliente) throws Exception{
 		if(nomeCliente == null ||
 				nomeCliente.isEmpty()){
 			throw new Exception("Nome do cliente nao pode ser nulo ou vazio");
 		}
-		
-		if(valorNotaFiscal < 0){
-			throw new Exception("Valor da nota fiscal nao pode ser negativo");
-		}
-		
-		if(imposto < 0){
-			throw new Exception("Imposto nao pode ser negativo");
-		}
-		
-		this.imposto = imposto;
-		this.nomeCliente = nomeCliente;
-		this.valor = valorNotaFiscal;
-	}
-	
-	public String getNomeCliente(){
-		return nomeCliente;
-	}
-	
-	public void setNomeCliente(String novoNome){
-		this.nomeCliente = novoNome;
+		mNomeCliente = nomeCliente;
 	}
 	
 	public double getValor(){
-		return valor;
+		return mValor;
 	}
 	
-	public void setValor(double novoValor){
-		this.valor = novoValor;
+	public void setValor(double valorNotaFiscal) throws Exception{
+		if(valorNotaFiscal < 0){
+			throw new Exception("Valor da nota fiscal nao pode ser negativo");
+		}
+		mValor = valorNotaFiscal;
 	}
 	
 	public double getImposto(){
-		return imposto;
+		return mImposto;
 	}
 	
-	public void setImpostoServico(double imposto){
-		this.imposto = imposto;
+	public void setImpostoServico(double imposto) throws Exception{
+		if(imposto < 0){
+			throw new Exception("Imposto nao pode ser negativo");
+		}
+		mImposto = imposto;
 	}
 
 }
