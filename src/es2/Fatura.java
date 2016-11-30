@@ -4,7 +4,7 @@ public class Fatura {
 
 	private String nomeCliente;
 	private String enderecoCliente;
-	private Servico servico;
+	private ServicoEnum servico;
 	private double valorFatura;
 	
 	public Fatura(String nomeCliente, String enderecoCliente, double valorFatura) throws Exception {
@@ -18,21 +18,12 @@ public class Fatura {
 		
 		this.nomeCliente = nomeCliente;
 		this.enderecoCliente = enderecoCliente;
-		this.servico = new Servico();
+		this.servico = ServicoEnum.IMPOSTO_DEFAULT;
 		this.valorFatura = valorFatura;
 	}
 	
-	public Fatura(String nomeCliente, String enderecoCliente, Servico servico, double valorFatura) throws Exception {
-		if(nomeCliente == null ||
-				nomeCliente.isEmpty()){
-			throw new Exception("Nome do cliente nao pode ser vazio ou nulo");
-		}
-		if(valorFatura < 0){
-			throw new Exception("Valor da fatura nao pode ser negativo");
-		}
-		if(servico == null){
-			servico = new Servico();
-		}
+	public Fatura(String nomeCliente, String enderecoCliente, ServicoEnum servico, double valorFatura) throws Exception {
+		this(nomeCliente, enderecoCliente, valorFatura);
 		
 		this.nomeCliente = nomeCliente;
 		this.enderecoCliente = enderecoCliente;
@@ -56,11 +47,11 @@ public class Fatura {
 		this.enderecoCliente = enderecoCliente;
 	}
 
-	public Servico getServico() {
+	public ServicoEnum getServico() {
 		return servico;
 	}
 
-	public void setServico(Servico servico) {
+	public void setServico(ServicoEnum servico) {
 		this.servico = servico;
 	}
 
@@ -73,8 +64,7 @@ public class Fatura {
 	}
 
 	public double calculaImposto() {
-		// TODO Auto-generated method stub
-		return servico.getImposto();
+		return (valorFatura * servico.valorImposto)/100;
 	}
 
 
