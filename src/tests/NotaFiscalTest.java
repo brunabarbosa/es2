@@ -20,37 +20,39 @@ public class NotaFiscalTest {
 	public void criaNotaFiscalTest() throws Exception {
 		
 		try {
-			nt = new NotaFiscal(null, 0);
+			nt = new NotaFiscal(null, 0, 0);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nome do cliente nao pode ser negativo ou vazio", e.getMessage());
+			assertEquals("Nome do cliente nao pode ser nulo ou vazio", e.getMessage());
 
 		}
 
 		try {
-			nt = new NotaFiscal("", 0);
+			nt = new NotaFiscal("", 0, 0);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nome do cliente nao pode ser negativo ou vazio", e.getMessage());
+			assertEquals("Nome do cliente nao pode ser nulo ou vazio", e.getMessage());
 
 		}
 		
 		try {
-			nt = new NotaFiscal("Bruna Barbosa", -1);
+			nt = new NotaFiscal("Bruna Barbosa", -1, 0);
 			fail();
 		} catch (Exception e) {
 			assertEquals("Valor da nota fiscal nao pode ser negativo", e.getMessage());
 		}
 		
-		nt = new NotaFiscal("Bruna Barbosa", 125.2);
+		try {
+			nt = new NotaFiscal("Bruna Barbosa", 100, -1);
+			fail();
+		} catch (Exception e) {
+			assertEquals("Imposto nao pode ser negativo", e.getMessage());
+		}
+		
+		nt = new NotaFiscal("Bruna Barbosa", 125.2, 0);
 		assertEquals(125.2, nt.getValor(), 0);
 		
 	}
 	
-	@Test
-	public void calculaImpostoValorDefaultTest() throws Exception{
-		nt = new NotaFiscal("Bruna Barbosa", 120.5);
-		assertEquals(7.23, nt.calculaImposto(), 0);
-	}
 	
 }

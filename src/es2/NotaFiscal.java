@@ -4,24 +4,25 @@ public class NotaFiscal {
 
 	private String nomeCliente;
 	private double valor;
-	private double imposto;
-	public static final double IMPOSTO_DEFAULT = 6;
-	
-	
-	public NotaFiscal(String nomeCliente, double d) throws Exception {
+	private double impostoServico;
+	public NotaFiscal(String nomeCliente, double valorNotaFiscal, double impostoServico) throws Exception {
 		
 		if(nomeCliente == null ||
 				nomeCliente.isEmpty()){
-			throw new Exception("Nome do cliente nao pode ser negativo ou vazio");
+			throw new Exception("Nome do cliente nao pode ser nulo ou vazio");
 		}
 		
-		if(d < 0){
+		if(valorNotaFiscal < 0){
 			throw new Exception("Valor da nota fiscal nao pode ser negativo");
 		}
 		
+		if(impostoServico < 0){
+			throw new Exception("Imposto nao pode ser negativo");
+		}
+		
+		this.impostoServico = impostoServico;
 		this.nomeCliente = nomeCliente;
-		this.valor = d;
-		imposto = IMPOSTO_DEFAULT;
+		this.valor = valorNotaFiscal;
 	}
 	
 	public String getNomeCliente(){
@@ -40,16 +41,16 @@ public class NotaFiscal {
 		this.valor = novoValor;
 	}
 	
-	public double getImposto(){
-		return imposto;
+	public double getImpostoServico(){
+		return impostoServico;
 	}
 	
-	public void setImposto(double impostoConsultoria){
-		this.imposto = impostoConsultoria;
+	public void setImpostoServico(double impostoServico){
+		this.impostoServico = impostoServico;
 	}
 
 	public double calculaImposto() {
-		return (getValor() * IMPOSTO_DEFAULT)/100;
+		return (getValor() * getImpostoServico())/100;
 	}
-	
+
 }
